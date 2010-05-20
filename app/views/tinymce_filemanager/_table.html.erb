@@ -1,0 +1,84 @@
+<div style="color: green; text-align: center; font-size: 16px;"><%= flash[:notice] %></div>
+<div style="color: red; text-align: center; font-size: 16px;"><%= flash[:error] %></div>
+
+<div class ="tinymce_manager_navi_bar">
+  <% @navi_bar.each do |item| %>
+    <% if item != @navi_bar.last %>
+      <% if item != @navi_bar.first %>
+        >>
+      <% end %>
+      [ <%= link_to item[:name], "#{@list_action}?navi=#{item[:link]}" %> ]
+    <% else %>
+      >> <%= item[:name] %>
+    <% end %>
+  <% end %>
+</div>
+
+<h1>Folders</h1>
+<table>
+  <% @dirs_table.each do |row| %>
+    <tr>
+    <% row.each do |column| %>
+      <td style="text-align: center; width: <%= @thumbs_width %>px ; vertical-align: top;">
+      <% if column=='..' %>
+        <a href="<%=h @list_url %><%=h (!@navi_up.blank? && "?navi=#{@navi_up}") || "" %>">
+          <% image_tag '/icons/back.png'%>
+          <div class="tinymce_manager_folder"></div>
+          <br />
+          ..
+          <br />
+        </a>
+        <br />
+      <% else %>
+          <a href="<%=h @list_url %>?navi=<%=h (!@navi.blank? && "#{@navi}#{column}") || column %>">
+          <% image_tag '/icons/next.png', :alt => column %>
+          <div class="tinymce_manager_folder"></div>
+          <br />
+          <%=h column[0..15] %><% if column.length > 15 %>...<% end %>
+        </a>
+        <br />
+        <a href="<%=h @destroy %>?destroy=<%=h column %>&navi=<%=h @navi %>">[Delete]</a>
+      <% end %>
+      </td>
+    <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<h2>Create folder</h2>
+
+<% form_for @folder_form_name, :url => "#{@folder_action_name}?navi=#{@navi}" do |f| %>
+  <%= f.text_field @folder_field_name %>
+  <%= f.submit 'Create' %>
+<% end %>
+
+<h1>Items</h1>
+
+<table>
+  <% @items_table.each do |row| %>
+    <tr>
+    <% row.each do |column| %>
+      <td style="text-align: center; width: 115px; vertical-align: top;">
+        <a href="#" onclick="tinymceReturnValue('<%= column[:normal] %>', '<%= column[:name] %>')">
+          <% if column[:unknown] %>
+          <%= image_tag '/icons/tinymce_filemanager/media_object.png', :alt => column[:name], :class => "tinymce_manager_object" %>
+          <% else %>
+            <%= image_tag column[:small], :alt => column[:name], :class => "tinymce_manager_object" %>
+          <% end %>
+          <br />
+          <%= column[:name].gsub(/(.jpeg)$/, "")[0..15] %><% if column[:name].gsub(/(.jpeg)$/, "").length > 15 %>...<% end %>
+          </a>
+          <br />
+          <a href="<%=h @destroy %>?destroy=<%=h column[:name] %>&navi=<%=h @navi %>">[Delete]</a>
+      </td>
+    <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<h2>Upload file</h2>
+
+<% form_for @upload_form_name, :url => "#{@upload_action_name}?navi=#{@navi}", :html => {:multipart => true } do |f| %>
+  <%= f.file_field @upload_field_name %>
+  <%= f.submit 'Upload' %>
+<% end %>

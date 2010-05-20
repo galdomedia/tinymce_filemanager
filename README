@@ -1,0 +1,19 @@
+TinymceFilemanager
+==================
+
+Introduction goes here.
+
+Istallation
+
+1. Download plugin and copy to vendor/plugins/tinymce_filemanager
+
+2. run generators:
+
+    script/generate tinymce_installation
+    script/generate tinymce_filemanager_icons_installation
+
+Example
+=======
+
+
+Copyright (c) 2010 [Galdomedia, Leszek Smentek], released under the MIT license
