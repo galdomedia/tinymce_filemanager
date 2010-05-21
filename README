@@ -1,19 +1,91 @@
 TinymceFilemanager
 ==================
 
-Introduction goes here.
-
 Istallation
 
 1. Download plugin and copy to vendor/plugins/tinymce_filemanager
 
-2. run generators:
+2. Run generators:
 
     script/generate tinymce_installation
     script/generate tinymce_filemanager_icons_installation
 
+3. Add include line in controller that will manage images ( controller Pages for example )
+
+    include Galdomedia::TinymceFilemanager
+
+4. In layout (best in page <head> section) add:
+
+    <%= tinymce_managed_javascript_tag "pages" %>
+
+   where "pages" is name of controller from last step
+
+5. Add tag in form:
+	
+   <%= tinymce_managed_tag "some_field_name", "some field content" %>
+   
+   or use builder method:
+   
+   tinymce_managed :some_field_name
+	
+
 Example
 =======
 
+controller "page":
+
+class PagesController < ApplicationController
+    
+    include Galdomedia::TinymceFilemanager
+
+    def index
+    ...
+    
+end
+
+application layout:
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  
+  ...
+
+  <%= tinymce_managed_javascript_tag "pages" %>
+
+  ...
+  
+  </head>
+  <body>
+    
+    ...
+    
+  </body>
+</html>
+
+pages new view:
+
+<h1>New page</h1>
+
+<% form_for(@page) do |f| %>
+  <%= f.error_messages %>
+
+  ...
+
+  <p>
+    <%= f.label :body %><br />
+    <%= f.tinymce_managed :body %>
+  </p>
+
+  ...
+  
+  <p>
+    <%= f.submit  "Create" %>
+  </p>
+
+<% end %>
+
+<%= link_to 'Back', pages_path %>
 
 Copyright (c) 2010 [Galdomedia, Leszek Smentek], released under the MIT license
