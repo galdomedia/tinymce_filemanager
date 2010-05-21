@@ -117,4 +117,4 @@ for "pages" controller
 	
 	end
 
-Copyright (c) 2010 [Galdomedia, Leszek Smentek], released under the MIT license
+Copyright (c) 2010 Galdomedia, Leszek Smentek, released under the MIT license
