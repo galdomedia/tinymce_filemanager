@@ -59,7 +59,7 @@ application layout:
   			...
   
   		</head>
-	<body>
+		<body>
 		
     		...
 		
