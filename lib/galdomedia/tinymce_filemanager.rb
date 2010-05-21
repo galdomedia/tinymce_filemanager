@@ -151,10 +151,10 @@ module Galdomedia
     private
 
     def list_base(base_folder, list_action, upload_action, destroy_action, create_folder_action)
-      navi_list = split_navi(params[:navi], '|')
-      @navi = build_navi(navi_list, '|')
-      @navi_up = @navi.gsub(/([|]?[^|]+[|]?)$/, '')
-      @navi_bar = build_navi_bar_items(navi_list, '|')
+      navi_list = split_navi(params[:navi], '$')
+      @navi = build_navi(navi_list, '$')
+      @navi_up = @navi.gsub(/([$]?[^$]+[$]?)$/, '')
+      @navi_bar = build_navi_bar_items(navi_list, '$')
       @list_action = list_action
 
       @list_url = url_for(list_action)
@@ -199,8 +199,8 @@ module Galdomedia
 
     def destroy_base(base_folder, list_action)
       if !params[:destroy].blank?
-        navi_list = split_navi(params[:navi], '|')
-        @navi = build_navi(navi_list, '|')
+        navi_list = split_navi(params[:navi], '$')
+        @navi = build_navi(navi_list, '$')
         object_name = validate_name(params[:destroy])
         if File.directory?(thumb_save_directory(base_folder, object_name, navi_list))
           FileUtils.rm_rf(save_directory(base_folder, object_name, navi_list))
@@ -216,15 +216,15 @@ module Galdomedia
         end
       end
       if !@navi.blank?
-        redirect_to "#{url_for(:action => list_action)}?navi=#{@navi.gsub(/[|]?$/, '')}"
+        redirect_to "#{url_for(:action => list_action)}?navi=#{@navi.gsub(/[$]$/, '')}"
       else
         redirect_to :action => list_action
       end
     end
 
      def create_folder_base(base_folder ,list_action)
-      navi_list = split_navi(params[:navi], '|')
-      @navi = build_navi(navi_list, '|').gsub(/[|]?$/, '')
+      navi_list = split_navi(params[:navi], '$')
+      @navi = build_navi(navi_list, '$').gsub(/[$]$/, '')
 
       if !params[@@form_folder_form_name].blank? && !params[@@form_folder_form_name][@@form_folder_field_name].blank?
         folder_name = validate_name(params[@@form_folder_form_name][@@form_folder_field_name])
@@ -232,15 +232,15 @@ module Galdomedia
         check_or_create_directory(thumb_save_directory(base_folder, folder_name, navi_list))
       end
       if !@navi.blank?
-        redirect_to "#{url_for(:action => list_action)}?navi=#{@navi.gsub(/[|]?$/, '')}"
+        redirect_to "#{url_for(:action => list_action)}?navi=#{@navi.gsub(/[$]$/, '')}"
       else
         redirect_to :action => list_action
       end
     end
 
     def upload_base(base_folder, list_action, mime_types, size_max, media_thumb = false)
-      navi_list = split_navi(params[:navi], '|')
-      @navi = build_navi(navi_list, '|')
+      navi_list = split_navi(params[:navi], '$')
+      @navi = build_navi(navi_list, '$')
 
       if !params[@@form_file_upload_form_name].blank? and !params[@@form_file_upload_form_name][@@form_file_upload_field_name].blank?
         file = params[@@form_file_upload_form_name][@@form_file_upload_field_name]
@@ -265,7 +265,7 @@ module Galdomedia
         end
       end
       if !@navi.blank?
-        redirect_to "#{url_for(:action => list_action)}?navi=#{@navi.gsub(/[|]?$/, '')}"
+        redirect_to "#{url_for(:action => list_action)}?navi=#{@navi.gsub(/[$]$/, '')}"
       else
         redirect_to :action => list_action
       end
