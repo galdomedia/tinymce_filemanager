@@ -1,12 +1,9 @@
 module Galdomedia::TinymceFilemanager::ViewHelpers
 
-  def init_tinymce_managed
-    tinymce_managed_javascript_tag
-  end
-
   def tinymce_managed_javascript_tag( controller = nil )
     "#{javascript_include_tag 'tiny_mce/tiny_mce'} <script src='/javascripts/tiny_mce/tiny_mce.js' type='text/javascript'></script>" + "<script type='text/javascript' src='/javascripts/tinymce_managed.js?#{!controller.blank? && "manager=#{controller}" || ""}'></script>"
   end
+
   def tinymce_managed_tag name, content = '', options = {}
     append_class_name(options, 'tinymce_managed')
     text_area_tag(name, content, options)
