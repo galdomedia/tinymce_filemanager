@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/tinymce_filemanager_destroy_image', :action => 'tinymce_filemanager_destroy_image'
   map.connect ':controller/tinymce_filemanager_create_images_folder', :action => 'tinymce_filemanager_create_images_folder'
 
-  map.connect ':controller/tinymce_filemanager_list_madia', :action => 'tinymce_filemanager_list_media'
+  map.connect ':controller/tinymce_filemanager_list_media', :action => 'tinymce_filemanager_list_media'
   map.connect ':controller/tinymce_filemanager_upload_media', :action => 'tinymce_filemanager_upload_media'
   map.connect ':controller/tinymce_filemanager_destroy_media', :action => 'tinymce_filemanager_destroy_media'
   map.connect ':controller/tinymce_filemanager_create_media_folder', :action => 'tinymce_filemanager_create_media_folder'
