@@ -296,7 +296,7 @@ module Galdomedia
     end
 
     def validate_name(name)
-      name.gsub(/[\/]/, '')
+      name.gsub(/[\/]/, '').gsub(/[$]/, '').gsub(/\.\./, '')
     end
 
     def split_navi(navi, separator)
@@ -363,15 +363,15 @@ module Galdomedia
     end
     
     def make_image_thumb(base_folder, file, navi_list)
-      image = Magick::Image.read(save_directory(base_folder, file.original_filename, navi_list)).first
+      image = Magick::Image.read(save_directory(base_folder, validate_name(file.original_filename), navi_list)).first
       image = image.resize_to_fill(@@thumbs_width, @@thumbs_height)
-      image.write(thumb_save_directory(base_folder, "#{file.original_filename}.jpeg", navi_list))
+      image.write(thumb_save_directory(base_folder, "#{validate_name(file.original_filename)}.jpeg", navi_list))
       #File.open((thumb_save_directory(base_folder, validate_name("#{file.original_filename}.unknown"), navi_list)), 'w')
     end
 
     def make_media_thumb(base_folder, file, navi_list)
-      source_file = save_directory(base_folder, file.original_filename, navi_list)
-      destination_file = thumb_save_directory(base_folder, file.original_filename, navi_list)
+      source_file = save_directory(base_folder, validate_name(file.original_filename), navi_list)
+      destination_file = thumb_save_directory(base_folder, validate_name(file.original_filename), navi_list)
       f = File.open("#{destination_file}.unknown", 'w')
       f.close
       command = "ffmpeg -i \"#{source_file}\" -ss 20 -vframes 1 -s #{@@thumbs_width}x#{@@thumbs_height} \"#{destination_file}.jpeg\""
