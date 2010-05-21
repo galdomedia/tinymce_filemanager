@@ -88,4 +88,31 @@ pages new view:
 
 <%= link_to 'Back', pages_path %>
 
+== Sample Configuration
+
+for "pages" controller
+
+class PagesController < ApplicationController
+    
+    include Galdomedia::TinymceFilemanager
+
+    # accept only jpeg and gif for images
+    image_accept_mime_types ['image/jpeg', 'image/gif']
+    
+    # accept only mpeg and flash files(swf) for media
+    media_accept_mime_types ['video/mpeg', 'application/x-shockwave-flash']
+
+    #thumbs created into '_small_' subdir
+    thumbs_subdir 'small'
+    
+    #images save to RAILS_ROOT/public/manager/images thumbs in RAILS_ROOT/public/manager/images/_small_
+    image_save_into_public_subdir 'manager/images'
+    
+    #images save to RAILS_ROOT/public/manager/images thumbs in RAILS_ROOT/public/manager/images/_small_
+    media_save_into_public_subdir 'manager/media'
+    
+    ...
+
+end
+
 Copyright (c) 2010 [Galdomedia, Leszek Smentek], released under the MIT license
