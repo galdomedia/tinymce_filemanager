@@ -216,7 +216,7 @@ module Galdomedia
         end
       end
       if !@navi.blank?
-        redirect_to "#{url_for(:action => list_action)}?navi=#{@navi.gsub(/[$]$/, '')}"
+        redirect_to "#{url_for(:action => list_action)}?navi=#{URI.escape(@navi.gsub(/[$]$/, ''))}"
       else
         redirect_to :action => list_action
       end
@@ -232,7 +232,7 @@ module Galdomedia
         check_or_create_directory(thumb_save_directory(base_folder, folder_name, navi_list))
       end
       if !@navi.blank?
-        redirect_to "#{url_for(:action => list_action)}?navi=#{@navi.gsub(/[$]$/, '')}"
+        redirect_to "#{url_for(:action => list_action)}?navi=#{URI.escape(@navi.gsub(/[$]$/, ''))}"
       else
         redirect_to :action => list_action
       end
@@ -265,7 +265,7 @@ module Galdomedia
         end
       end
       if !@navi.blank?
-        redirect_to "#{url_for(:action => list_action)}?navi=#{@navi.gsub(/[$]$/, '')}"
+        redirect_to "#{url_for(:action => list_action)}?navi=#{URI.escape(@navi.gsub(/[$]$/, ''))}"
       else
         redirect_to :action => list_action
       end
