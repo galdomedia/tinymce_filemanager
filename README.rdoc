@@ -36,7 +36,7 @@ Istallation
 Example
 =======
 
-controller "page":
+controller "pages":
 
 	class PagesController < ApplicationController
 	
