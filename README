@@ -4,29 +4,33 @@ TinymceFilemanager (v0.1)
 Istallation
 
 1. Download plugin and copy to vendor/plugins/tinymce_filemanager
+   
+   or use:
+
+   * script/plugin install git://git@github.com:galdomedia/tinymce_filemanager.git
 
 2. Run generators:
 
-    script/generate tinymce_installation
-    script/generate tinymce_filemanager_icons_installation
+   * script/generate tinymce_installation
+   * script/generate tinymce_filemanager_icons_installation
 
 3. Add include line in controller that will manage images ( controller Pages for example )
 
-    include Galdomedia::TinymceFilemanager
+   * include Galdomedia::TinymceFilemanager
 
 4. In layout (best in page <head> section) add:
 
-    <%= tinymce_managed_javascript_tag "pages" %>
+   * <%= tinymce_managed_javascript_tag "pages" %>
 
    where "pages" is name of controller from last step
 
 5. Add tag in form:
 	
-   <%= tinymce_managed_tag "some_field_name", "some field content" %>
+   * <%= tinymce_managed_tag "some_field_name", "some field content" %>
    
    or use builder method:
    
-   tinymce_managed :some_field_name
+   * tinymce_managed :some_field_name
 	
 
 Example
