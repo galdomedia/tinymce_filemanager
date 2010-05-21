@@ -7,28 +7,28 @@ module Galdomedia
 
     module ClassMethods
 
-      def list_images()
+      def tinymce_filemanager_list_images()
       end
 
-      def upload_image()
+      def tinymce_filemanager_upload_image()
       end
 
-      def destroy_image()
+      def tinymce_filemanager_destroy_image()
       end
 
-      def create_image_folder()
+      def tinymce_filemanager_create_images_folder()
       end
 
-      def list_media()
+      def tinymce_filemanager_list_media()
       end
 
-      def upload_media()
+      def tinymce_filemanager_upload_media()
       end
 
-      def destroy_media()
+      def tinymce_filemanager_destroy_media()
       end
 
-      def create_media_folder()
+      def tinymce_filemanager_create_media_folder()
       end
 
       protected
@@ -115,37 +115,37 @@ module Galdomedia
 
     public
 
-    def list_images
-      list_base(images_folder, "list_images", 'upload_image', 'destroy_image', 'create_image_folder')
+    def tinymce_filemanager_list_images
+      list_base(images_folder, "tinymce_filemanager_list_images", 'tinymce_filemanager_upload_image', 'tinymce_filemanager_destroy_image', 'tinymce_filemanager_create_images_folder')
     end
 
-    def upload_image
-      upload_base(images_folder, "list_images", accept_image_mime, image_size_limit)
+    def tinymce_filemanager_upload_image
+      upload_base(images_folder, "tinymce_filemanager_list_images", accept_image_mime, image_size_limit)
     end
 
-    def destroy_image()
-      destroy_base(images_folder, "list_images")
+    def tinymce_filemanager_destroy_image()
+      destroy_base(images_folder, "tinymce_filemanager_list_images")
     end
 
-    def create_image_folder()
-      create_folder_base(images_folder ,"list_images")
+    def tinymce_filemanager_create_images_folder()
+      create_folder_base(images_folder ,"tinymce_filemanager_list_images")
     end
 
 
-    def list_media
-      list_base(media_folder, "list_media", 'upload_media', 'destroy_media', 'create_media_folder')
+    def tinymce_filemanager_list_media
+      list_base(media_folder, "tinymce_filemanager_list_media", 'tinymce_filemanager_upload_media', 'tinymce_filemanager_destroy_media', 'tinymce_filemanager_create_media_folder')
     end
 
-    def upload_media
-      upload_base(media_folder, "list_media", accept_media_mime, media_size_limit, true)
+    def tinymce_filemanager_upload_media
+      upload_base(media_folder, "tinymce_filemanager_list_media", accept_media_mime, media_size_limit, true)
     end
 
-    def destroy_media()
-      destroy_base(media_folder, "list_media")
+    def tinymce_filemanager_destroy_media()
+      destroy_base(media_folder, "tinymce_filemanager_list_media")
     end
 
-    def create_media_folder()
-      create_folder_base(media_folder ,"list_media")
+    def tinymce_filemanager_create_media_folder()
+      create_folder_base(media_folder ,"tinymce_filemanager_list_media")
     end
 
     private
