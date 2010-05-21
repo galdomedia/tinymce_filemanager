@@ -49,7 +49,7 @@ module Galdomedia
         write_inheritable_array(:image_save_into_public_subdir, params)
       end
 
-      def image_file_size_limit(params)
+      def image_file_size_limit(*params)
         write_inheritable_array(:image_file_size_limit, params)
       end
 
@@ -90,11 +90,11 @@ module Galdomedia
     end
 
     def image_size_limit
-      self.class.read_inheritable_attribute(:image_file_size_limit) || 5.megabytes
+      (self.class.read_inheritable_attribute(:image_file_size_limit) && self.class.read_inheritable_attribute(:image_file_size_limit)[0]) || 5.megabytes
     end
 
     def media_size_limit
-      self.class.read_inheritable_attribute(:media_file_size_limit) || 30.megabytes
+      (self.class.read_inheritable_attribute(:media_file_size_limit) && self.class.read_inheritable_attribute(:media_file_size_limit)[0]) || 30.megabytes
     end
 
     @@form_file_upload_form_name = 'upload_form'

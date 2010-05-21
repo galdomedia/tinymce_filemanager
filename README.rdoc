@@ -100,9 +100,15 @@ for "pages" controller
 
 		# accept only jpeg and gif for images
 		image_accept_mime_types ['image/jpeg', 'image/gif']
+		
+		# limit image file size to 2MB
+		image_file_size_limit 2.megabytes
 		    
 		# accept only mpeg and flash files(swf) for media
 		media_accept_mime_types ['video/mpeg', 'application/x-shockwave-flash']
+
+		# limit media file size to 15MB
+		media_file_size_limit 15.megabytes
 		
 		#thumbs created into '_small_' subdir
 		thumbs_subdir 'small'
