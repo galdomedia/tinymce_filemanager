@@ -6,7 +6,7 @@
    
    or use:
 
-	script/plugin install git://git@github.com:galdomedia/tinymce_filemanager.git
+	script/plugin install git://github.com/galdomedia/tinymce_filemanager.git
 
 2. Run generators:
 
