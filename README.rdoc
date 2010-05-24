@@ -2,6 +2,8 @@
 
 == Installation
 
+This plugin require "RMagic" to work. To build media files thumbnails "ffmpeg" need to be instaled in system
+
 1. Download plugin and copy to vendor/plugins/tinymce_filemanager
    
    or use:
@@ -30,7 +32,6 @@
    or use builder method:
    
 	tinymce_managed :some_field_name
-	
 
 == Basic Usage
 
