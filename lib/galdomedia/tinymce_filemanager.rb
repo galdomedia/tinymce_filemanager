@@ -248,6 +248,7 @@ module Galdomedia
           if File.size(file) < size_max
             if mime_types.include?(file.content_type())
               FileUtils.mv(file.path, save_directory(base_folder, validate_name(file.original_filename), navi_list))
+              FileUtils.chmod 0666, save_directory(base_folder, validate_name(file.original_filename), navi_list)
               if media_thumb
                 make_media_thumb(base_folder, file, navi_list)
               else

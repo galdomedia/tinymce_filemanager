@@ -4,7 +4,7 @@ class TinymceFilemanagerIconsInstallationGenerator < Rails::Generator::Base
     record do |m|
 
       src_prefix = File.join('icons', 'tinymce_filemanager')
-      dest_prefix = File.join('public', 'icons', 'tinymce_filemanager')
+      dest_prefix = File.join('public', 'images', 'icons', 'tinymce_filemanager')
 
       m.directory dest_prefix
 
