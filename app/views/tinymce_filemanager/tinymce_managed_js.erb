@@ -6,6 +6,7 @@ function tinymce_init()
 	editor_selector : "tinymce_managed",
         theme : "advanced",
         relative_urls : false,
+        language: "<%=h @manager_lang %>",
 
         plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups,autosave",
 
@@ -40,7 +41,7 @@ function tinymceImagemanager(field_name, url, type, win)
 function tinymceImageSelect(win, field_name)
 {
     tinyMCE.activeEditor.windowManager.open({
-        file : '/<%= @manager_controller %>/tinymce_filemanager_list_images',
+        file : '/<%= @manager_controller.untaint %>/tinymce_filemanager_list_images',
         title : 'Browser',
         width : 800,
         height : 600,
@@ -57,7 +58,7 @@ function tinymceImageSelect(win, field_name)
 function tinymceMediaSelect(win, field_name)
 {
     tinyMCE.activeEditor.windowManager.open({
-        file : '/<%= @manager_controller %>/tinymce_filemanager_list_media',
+        file : '/<%= @manager_controller.untaint %>/tinymce_filemanager_list_media',
         title : 'Browser',
         width : 800,
         height : 600,

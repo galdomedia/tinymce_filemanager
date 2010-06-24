@@ -1,5 +1,5 @@
-<div style="color: green; text-align: center; font-size: 16px;"><%= flash[:notice] %></div>
-<div style="color: red; text-align: center; font-size: 16px;"><%= flash[:error] %></div>
+<div style="color: green; text-align: center; font-size: 16px;"><%= flash[:notice].untaint %></div>
+<div style="color: red; text-align: center; font-size: 16px;"><%= flash[:error].untaint %></div>
 
 <div class ="tinymce_manager_navi_bar">
   <% @navi_bar.each do |item| %>
@@ -7,14 +7,14 @@
       <% if item != @navi_bar.first %>
         >>
       <% end %>
-      [ <%= link_to item[:name], "#{@list_action}?navi=#{item[:link]}" %> ]
+      [ <%= link_to item[:name].untaint, "#{@list_action}?navi=#{item[:link].untaint}" %> ]
     <% else %>
-      >> <%= item[:name] %>
+      >> <%= item[:name].untaint %>
     <% end %>
   <% end %>
 </div>
 
-<h1>Folders</h1>
+<h1><%= t("Folders").untaint %></h1>
 <table>
   <% @dirs_table.each do |row| %>
     <tr>
@@ -37,7 +37,7 @@
           <%=h column[0..15] %><% if column.length > 15 %>...<% end %>
         </a>
         <br />
-        <a href="<%=h @destroy %>?destroy=<%=h column %>&navi=<%=h @navi %>">[Delete]</a>
+        <a href="<%=h @destroy %>?destroy=<%=h column %>&navi=<%=h @navi %>">[<%= t("Delete").untaint %>]</a>
       <% end %>
       </td>
     <% end %>
@@ -45,40 +45,40 @@
   <% end %>
 </table>
 
-<h2>Create folder</h2>
+<h2><%= t("Create folder").untaint %></h2>
 
 <% form_for @folder_form_name, :url => "#{@folder_action_name}?navi=#{@navi}" do |f| %>
   <%= f.text_field @folder_field_name %>
-  <%= f.submit 'Create' %>
+  <%= f.submit t("Create").untaint %>
 <% end %>
 
-<h1>Items</h1>
+<h1><%= t("Items").untaint %></h1>
 
 <table>
   <% @items_table.each do |row| %>
     <tr>
     <% row.each do |column| %>
       <td style="text-align: center; width: 115px; vertical-align: top;">
-        <a href="#" onclick="tinymceReturnValue('<%= column[:normal] %>', '<%= column[:name] %>')">
+        <a href="#" onclick="tinymceReturnValue('<%= column[:normal].untaint %>', '<%= column[:name].untaint %>')">
           <% if column[:unknown] %>
-          <%= image_tag '/images/icons/tinymce_filemanager/media_object.png', :alt => column[:name], :class => "tinymce_manager_object" %>
+          <%= image_tag '/images/icons/tinymce_filemanager/media_object.png', :alt => column[:name].untaint, :class => "tinymce_manager_object" %>
           <% else %>
-            <%= image_tag column[:small], :alt => column[:name], :class => "tinymce_manager_object" %>
+            <%= image_tag column[:small].untaint, :alt => column[:name].untaint, :class => "tinymce_manager_object" %>
           <% end %>
           <br />
-          <%= column[:name].gsub(/(.jpeg)$/, "")[0..15] %><% if column[:name].gsub(/(.jpeg)$/, "").length > 15 %>...<% end %>
+          <%= column[:name].gsub(/(.jpeg)$/, "")[0..15].untaint %><% if column[:name].gsub(/(.jpeg)$/, "").length > 15 %>...<% end %>
           </a>
           <br />
-          <a href="<%=h @destroy %>?destroy=<%=h column[:name] %>&navi=<%=h @navi %>">[Delete]</a>
+          <a href="<%=h @destroy %>?destroy=<%=h column[:name] %>&navi=<%=h @navi %>">[<%= t("Delete").untaint %>]</a>
       </td>
     <% end %>
     </tr>
   <% end %>
 </table>
 
-<h2>Upload file</h2>
+<h2><%= t("Upload file").untaint %></h2>
 
 <% form_for @upload_form_name, :url => "#{@upload_action_name}?navi=#{@navi}", :html => {:multipart => true } do |f| %>
   <%= f.file_field @upload_field_name %>
-  <%= f.submit 'Upload' %>
+  <%= f.submit t("Upload").untaint %>
 <% end %>
