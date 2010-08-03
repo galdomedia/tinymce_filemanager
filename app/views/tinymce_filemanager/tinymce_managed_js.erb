@@ -41,7 +41,7 @@ function tinymceImagemanager(field_name, url, type, win)
 function tinymceImageSelect(win, field_name)
 {
     tinyMCE.activeEditor.windowManager.open({
-        file : '/<%= @manager_controller.untaint %>/tinymce_filemanager_list_images',
+        file : '/<%= @manager_controller.untaint %>/tinymce_filemanager/list_images',
         title : 'Browser',
         width : 800,
         height : 600,
@@ -58,7 +58,7 @@ function tinymceImageSelect(win, field_name)
 function tinymceMediaSelect(win, field_name)
 {
     tinyMCE.activeEditor.windowManager.open({
-        file : '/<%= @manager_controller.untaint %>/tinymce_filemanager_list_media',
+        file : '/<%= @manager_controller.untaint %>/tinymce_filemanager/list_media',
         title : 'Browser',
         width : 800,
         height : 600,

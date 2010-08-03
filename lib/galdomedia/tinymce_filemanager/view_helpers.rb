@@ -2,8 +2,8 @@ module Galdomedia::TinymceFilemanager::ViewHelpers
 
   def tinymce_managed_javascript_tag( controller = nil )
     scripts = "<script src='/javascripts/tiny_mce/tiny_mce.js' type='text/javascript'></script>\n" +
-    "<script type='text/javascript' src='/javascripts/tinymce_managed.js?#{!controller.blank? && "manager=#{controller.to_s}" || ""}'></script>"
-    Rails.version > "2.3.5" ? scripts.html_safe : scripts
+      "<script type='text/javascript' src='/javascripts/tinymce_managed.js?#{!controller.blank? && "manager=#{controller.to_s}" || ""}'></script>"
+    scripts.respond_to?(:html_safe) ? scripts.html_safe : scripts
   end
 
   def tinymce_managed_tag name, content = '', options = {}

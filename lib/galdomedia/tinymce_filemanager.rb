@@ -116,36 +116,36 @@ module Galdomedia
     public
 
     def tinymce_filemanager_list_images
-      list_base(images_folder, "tinymce_filemanager_list_images", 'tinymce_filemanager_upload_image', 'tinymce_filemanager_destroy_image', 'tinymce_filemanager_create_images_folder')
+      list_base(images_folder, "tinymce_filemanager/list_images", 'tinymce_filemanager/upload_image', 'tinymce_filemanager/destroy_image', 'tinymce_filemanager/create_images_folder')
     end
 
     def tinymce_filemanager_upload_image
-      upload_base(images_folder, "tinymce_filemanager_list_images", accept_image_mime, image_size_limit)
+      upload_base(images_folder, "tinymce_filemanager/list_images", accept_image_mime, image_size_limit)
     end
 
     def tinymce_filemanager_destroy_image()
-      destroy_base(images_folder, "tinymce_filemanager_list_images")
+      destroy_base(images_folder, "tinymce_filemanager/list_images")
     end
 
     def tinymce_filemanager_create_images_folder()
-      create_folder_base(images_folder ,"tinymce_filemanager_list_images")
+      create_folder_base(images_folder ,"tinymce_filemanager/list_images")
     end
 
 
     def tinymce_filemanager_list_media
-      list_base(media_folder, "tinymce_filemanager_list_media", 'tinymce_filemanager_upload_media', 'tinymce_filemanager_destroy_media', 'tinymce_filemanager_create_media_folder')
+      list_base(media_folder, "tinymce_filemanager/list_media", 'tinymce_filemanager/upload_media', 'tinymce_filemanager/destroy_media', 'tinymce_filemanager/create_media_folder')
     end
 
     def tinymce_filemanager_upload_media
-      upload_base(media_folder, "tinymce_filemanager_list_media", accept_media_mime, media_size_limit, true)
+      upload_base(media_folder, "tinymce_filemanager/list_media", accept_media_mime, media_size_limit, true)
     end
 
     def tinymce_filemanager_destroy_media()
-      destroy_base(media_folder, "tinymce_filemanager_list_media")
+      destroy_base(media_folder, "tinymce_filemanager/list_media")
     end
 
     def tinymce_filemanager_create_media_folder()
-      create_folder_base(media_folder ,"tinymce_filemanager_list_media")
+      create_folder_base(media_folder ,"tinymce_filemanager/list_media")
     end
 
     private
@@ -191,10 +191,12 @@ module Galdomedia
         end
       end
       
+      #Bonias: moze tak:
+      #@dirs_table = @dirs.sort.in_groups_of(6, false) ?
       @dirs_table = build_table(@dirs.sort, 6)
       @items_table = build_table(@items.sort{ | i, j | i[:name] <=> j[:name] }, 6)
 
-      render :partial => 'tinymce_filemanager/table', :layout => 'tinymce_filemanager/main'
+      render :template => 'tinymce_filemanager/table', :layout => 'tinymce_filemanager/main'
     end
 
     def destroy_base(base_folder, list_action)
@@ -216,13 +218,13 @@ module Galdomedia
         end
       end
       if !@navi.blank?
-        redirect_to "#{url_for(:action => list_action)}?navi=#{URI.escape(@navi.gsub(/[$]$/, ''))}"
+        redirect_to "#{url_for(:action => list_action.gsub('/', '_'))}?navi=#{URI.escape(@navi.gsub(/[$]$/, ''))}"
       else
-        redirect_to :action => list_action
+        redirect_to :action => list_action.gsub('/', '_')
       end
     end
 
-     def create_folder_base(base_folder ,list_action)
+    def create_folder_base(base_folder ,list_action)
       navi_list = split_navi(params[:navi], '$')
       @navi = build_navi(navi_list, '$').gsub(/[$]$/, '')
 
@@ -232,9 +234,9 @@ module Galdomedia
         check_or_create_directory(thumb_save_directory(base_folder, folder_name, navi_list))
       end
       if !@navi.blank?
-        redirect_to "#{url_for(:action => list_action)}?navi=#{URI.escape(@navi.gsub(/[$]$/, ''))}"
+        redirect_to "#{url_for(:action => list_action.gsub('/', '_'))}?navi=#{URI.escape(@navi.gsub(/[$]$/, ''))}"
       else
-        redirect_to :action => list_action
+        redirect_to :action => list_action.gsub('/', '_')
       end
     end
 
@@ -266,9 +268,9 @@ module Galdomedia
         end
       end
       if !@navi.blank?
-        redirect_to "#{url_for(:action => list_action)}?navi=#{URI.escape(@navi.gsub(/[$]$/, ''))}"
+        redirect_to "#{url_for(:action => list_action.gsub('/', '_'))}?navi=#{URI.escape(@navi.gsub(/[$]$/, ''))}"
       else
-        redirect_to :action => list_action
+        redirect_to :action => list_action.gsub('/', '_')
       end
     end
 
@@ -331,13 +333,13 @@ module Galdomedia
         navi << {:link => "", :name => "ROOT"}
         list.each do |p|
           if p.length > 10
-              name = "#{p[0..7]}..."
-            else
-              name = p
-            end
+            name = "#{p[0..7]}..."
+          else
+            name = p
+          end
           if navi_str.empty?
             navi_str += "#{p}"
-            navi << {:link => "", :name => name}
+            navi << {:link => navi_str, :name => name}
           else
             navi_str += "#{separator}#{p}"
             navi << {:link => navi_str, :name => name}
