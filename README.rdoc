@@ -1,5 +1,8 @@
 = TinymceFilemanager (v0.2)
 
+TinyMCE wrapper, that takes care of managing media files (images, videos) and links within your application.
+
+
 == Installation
 
 This plugin require "RMagic" to work. RMagick is used to create thumbnails of images.
@@ -121,8 +124,20 @@ for "pages" controller
 		#images save to RAILS_ROOT/public/manager/images thumbs in RAILS_ROOT/public/manager/images/_small_
 		media_save_into_public_subdir 'manager/media'
 		
+		#classes of objects, that can be browsed through LinkBrowser
+		link_classes_accepted [Page]
+		
 		...
 	
 	end
+
+
+== TODO
+
+- convert into gem
+
+- link browser should accept chained queries (ie. Page.where('visible=?',true).order('updated_at DESC') )
+
+
 
 Copyright (c) 2010 Galdomedia, Leszek Smentek, released under the MIT license
