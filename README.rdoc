@@ -18,7 +18,7 @@ If you want, you can also manage multimedia files (ie. videos), but then you wil
 
 3. Add include line in controller that will manage images ( controller Pages for example )
 
-	include Galdomedia::TinymceFilemanager
+	include TinymceFilemanager
 
 4. In layout (best in page <head> section) add:
 
@@ -40,7 +40,7 @@ controller "pages":
 
 	class PagesController < ApplicationController
 	
-    		include Galdomedia::TinymceFilemanager
+    		include TinymceFilemanager
 		
     		def index
     		...
@@ -98,7 +98,7 @@ for "pages" controller
 
 	class PagesController < ApplicationController
 	
-		include Galdomedia::TinymceFilemanager
+		include TinymceFilemanager
 
 		# accept only jpeg and gif for images
 		image_accept_mime_types ['image/jpeg', 'image/gif']

@@ -1,4 +1,3 @@
-module Galdomedia
   module TinymceFilemanager
 
     def self.included(base)
@@ -147,6 +146,8 @@ module Galdomedia
     def tinymce_filemanager_create_media_folder()
       create_folder_base(media_folder ,"tinymce_filemanager/list_media")
     end
+    
+    
 
     private
 
@@ -382,4 +383,3 @@ module Galdomedia
       system(command)
     end
   end
-end

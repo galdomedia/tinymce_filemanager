@@ -1,4 +1,4 @@
-module Galdomedia::TinymceFilemanager::ViewHelpers
+module TinymceFilemanager::ViewHelpers
 
   def tinymce_managed_javascript_tag( controller = nil )
     scripts = "<script src='/javascripts/tiny_mce/tiny_mce.js' type='text/javascript'></script>\n" +

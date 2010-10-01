@@ -1,5 +1,5 @@
 require 'RMagick'
-require 'galdomedia/tinymce_filemanager'
+require 'tinymce_filemanager'
 
-ActionView::Base.send(:include, Galdomedia::TinymceFilemanager::ViewHelpers)
-ActionView::Helpers::FormBuilder.send(:include, Galdomedia::TinymceFilemanager::BuilderMethods)
+ActionView::Base.send(:include, TinymceFilemanager::ViewHelpers)
+ActionView::Helpers::FormBuilder.send(:include, TinymceFilemanager::BuilderMethods)
