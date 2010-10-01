@@ -35,6 +35,10 @@ function tinymceImagemanager(field_name, url, type, win)
         case 'media':
             tinymceMediaSelect(win, field_name);
             break;
+
+				case 'file':
+            tinymceLinkSelect(win, field_name);
+            break;
     }
 }
 
@@ -59,6 +63,23 @@ function tinymceMediaSelect(win, field_name)
 {
     tinyMCE.activeEditor.windowManager.open({
         file : '/<%= @manager_controller.untaint %>/tinymce_filemanager/list_media',
+        title : 'Browser',
+        width : 800,
+        height : 600,
+        resizable : "no",
+        inline : "yes",
+        close_previous : "no"
+    }, {
+        window : win,
+        input : field_name
+    });
+    return false;
+}
+
+function tinymceLinkSelect(win, field_name)
+{
+    tinyMCE.activeEditor.windowManager.open({
+        file : '/<%= @manager_controller.untaint %>/tinymce_filemanager/list_links',
         title : 'Browser',
         width : 800,
         height : 600,

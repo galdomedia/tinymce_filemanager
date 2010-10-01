@@ -29,6 +29,9 @@
 
       def tinymce_filemanager_create_media_folder()
       end
+      
+      def tinymce_filemanager_list_links()
+      end
 
       protected
 
@@ -63,6 +66,11 @@
       def media_file_size_limit(*params)
         write_inheritable_array(:media_file_size_limit, params)
       end
+      
+      def link_classes_accepted(*params)
+        write_inheritable_array(:link_classes, params)
+      end
+
 
     end
 
@@ -81,7 +89,7 @@
     end
 
     def accept_image_mime
-      self.class.read_inheritable_attribute(:image_accept_mime_types) || ['image/jpeg', 'image/gif', 'image/png']
+      self.class.read_inheritable_attribute(:image_accept_mime_types) || ['image/jpeg', 'image/gif', 'image/png', 'image/jpg', 'image/bmp']
     end
 
     def accept_media_mime
@@ -94,6 +102,10 @@
 
     def media_size_limit
       (self.class.read_inheritable_attribute(:media_file_size_limit) && self.class.read_inheritable_attribute(:media_file_size_limit)[0]) || 30.megabytes
+    end
+    
+    def link_classes
+      (self.class.read_inheritable_attribute(:link_classes) || []).flatten
     end
 
     @@form_file_upload_form_name = 'upload_form'
@@ -147,9 +159,52 @@
       create_folder_base(media_folder ,"tinymce_filemanager/list_media")
     end
     
+    def tinymce_filemanager_list_links
+      params[:search_form] ||= {}
+      @available_classes = link_classes
+      @links = tinymece_filemanager_find_links
+
+      render :template => 'tinymce_filemanager/links', :layout => 'tinymce_filemanager/main'
+    end
     
 
     private
+    def tinymece_filemanager_find_links()
+      all = []
+      merged_link_classes.each do |klass|
+        scope = klass
+        if not params[:search_form].empty? and not params[:search_form][:name].blank?
+          n = "%#{params[:search_form][:name]}%"
+          if klass.new.attributes.keys.include?('name')
+            scope = klass.where('name like ?', n)
+          elsif klass.new.attributes.keys.include?('title')
+            scope = klass.where('title like ?', n)
+          else
+
+          end
+        end
+        all += scope.all.map do |m|
+          name = m.respond_to?(:name) ? m.name : (m.respond_to?(:title) ? m.title : "-")
+          path = polymorphic_path(m)
+          {:name => name, :path => path}
+
+        end
+      end
+      all
+    end
+
+    def merged_link_classes
+      return link_classes if params[:search_form][:classes].blank?
+      classes = Array(params[:search_form][:classes]).flatten.compact
+      classes = classes.map do |c|
+        begin
+          c.camelize.constantize
+        rescue NameError => e
+          nil
+        end
+      end.uniq.compact
+      link_classes & classes
+    end
 
     def list_base(base_folder, list_action, upload_action, destroy_action, create_folder_action)
       navi_list = split_navi(params[:navi], '$')

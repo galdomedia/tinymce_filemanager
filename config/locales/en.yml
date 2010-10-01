@@ -1,9 +1,14 @@
-en:
-  Manager: "Manager"
-  Folders: "Folders"
-  "Create folder": "Create folder"
-  Create: "Create"
-  Items: "Items"
-  Delete: "Delete"
-  "Upload file": "Upload file"
-  Upload: "Upload"
+pl:
+  tinymce_filemanager:
+    manager: "Manager"
+    folders: "Directories"
+    create_folder: "Create directory"
+    create: "Create"
+    items: "Items"
+    delete: "Delete"
+    upload_file: "Upload file"
+    upload: "Upload"
+    links: "Links"
+    filter_links: "Filter links"
+    select_link: "Select link"
+    by_name: "Name"

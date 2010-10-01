@@ -4,15 +4,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <title><%= t("Manager").untaint %></title>
+    <title><%= t("tinymce_filemanager.manager").untaint %></title>
     <%= javascript_include_tag 'tiny_mce/tiny_mce' %>
     <%= javascript_include_tag 'tiny_mce/tiny_mce_popup' %>
     <%= tinymce_managed_javascript_tag %>
 
     <style type="text/css">
       .tinymce_manager_folder {
-        width: <%= @thumbs_width %>px;
-        height: <%= @thumbs_height %>px;
+        width: <%= @thumbs_width || 10 %>px;
+        height: <%= @thumbs_height || 10 %>px;
         background-image: url("/images/icons/tinymce_filemanager/folder.png");
         margin: 4px;
       }
@@ -22,23 +22,23 @@
       }
 
       .tinymce_manager_object {
-        width: <%= @thumbs_width %>px;
-        height: <%= @thumbs_height %>px;
+        width: <%= @thumbs_width || 10 %>px;
+        height: <%= @thumbs_height || 10 %>px;
         border: 0 none;
         margin: 4px;
       }
 
       .tinymce_manager_object:hover {
-        width: <%= @thumbs_width + 8 %>px;
-        height: <%= @thumbs_height + 8%>px;
+        width: <%= (@thumbs_width || 10) + 8 %>px;
+        height: <%= (@thumbs_height || 10) + 8%>px;
         border: 0 none;
         margin: 0;
       }
 
       .tinymce_manager_object_unknown {
         background-image: url("/images/icons/tinymce_filemanager/media_object.png");
-        width: <%= @thumbs_width %>px;
-        height: <%= @thumbs_height %>px;
+        width: <%= @thumbs_width || 10 %>px;
+        height: <%= @thumbs_height || 10 %>px;
         border: 0 none;
         margin: 4px;
       }

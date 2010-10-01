@@ -1,4 +1,4 @@
-= TinymceFilemanager (v0.1)
+= TinymceFilemanager (v0.2)
 
 == Installation
 

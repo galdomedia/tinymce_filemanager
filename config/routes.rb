@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   match ':controller/tinymce_filemanager/destroy_media', :action => 'tinymce_filemanager_destroy_media'
   match ':controller/tinymce_filemanager/create_media_folder', :action => 'tinymce_filemanager_create_media_folder'
   
+  match ':controller/tinymce_filemanager/list_links', :action => 'tinymce_filemanager_list_links'
+  
 end

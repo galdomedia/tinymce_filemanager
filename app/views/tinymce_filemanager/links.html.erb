@@ -1,0 +1,34 @@
+<div style="color: green; text-align: center; font-size: 16px;"><%= flash[:notice] %></div>
+<div style="color: red; text-align: center; font-size: 16px;"><%= flash[:error] %></div>
+
+<h1><%= t "tinymce_filemanager.links", :default => 'Links' %></h1>
+<%= form_for 'search_form', :url => url_for('list_links') do |f| %>
+
+  <table>
+    <% @available_classes.in_groups_of(6).each do |klasses| %>
+      <tr>
+        <% klasses.each do |klass| %>
+          <td>
+            <% if klass -%>
+              <%= f.check_box klass.name.underscore, {:name => 'search_form[classes][]', :checked => (params[:search_form][:classes] || []).include?(klass.name.underscore)}, klass.name.underscore, '' %> <%= klass.human_name %>
+            <% else -%>
+              &nbsp;
+            <% end -%>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= t "tinymce_filemanager.by_name"%>: <%= f.text_field :name, :value => params[:search_form][:name] %>
+  <%= f.submit t("tinymce_filemanager.filter_links") %>
+<% end %>
+
+<h2><%= t "tinymce_filemanager.select_link"%>:</h2>
+
+<table>
+  <% @links.each do |link| %>
+    <tr>
+      <td><%= link_to_function link[:path], "tinymceReturnValue('#{link[:path]}', '#{link[:path]}')" %></td>
+    </tr>
+  <% end %>
+</table>
