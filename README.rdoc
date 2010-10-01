@@ -2,18 +2,19 @@
 
 == Installation
 
-This plugin require "RMagic" to work. To build media files thumbnails "ffmpeg" need to be instaled in system
+This plugin require "RMagic" to work. RMagick is used to create thumbnails of images.
 
-1. Download plugin and copy to vendor/plugins/tinymce_filemanager
-   
-   or use:
+If you want, you can also manage multimedia files (ie. videos), but then you will need to have ffmpef installed on your machine (thumb generation).
 
-	script/plugin install git://github.com/galdomedia/tinymce_filemanager.git
+
+1. Install plugin using console:
+
+	rails plugin install git://github.com/galdomedia/tinymce_filemanager.git
 
 2. Run generators:
 
-	script/generate tinymce_installation
-	script/generate tinymce_filemanager_icons_installation
+	rails generate tinymce_filemanager:installation
+	rails generate tinymce_filemanager:icons_installation
 
 3. Add include line in controller that will manage images ( controller Pages for example )
 
