@@ -302,10 +302,10 @@
 
       if !params[@@form_file_upload_form_name].blank? and !params[@@form_file_upload_form_name][@@form_file_upload_field_name].blank?
         file = params[@@form_file_upload_form_name][@@form_file_upload_field_name]
-        if file.type == Tempfile
+        if file && file.tempfile
           if File.size(file) < size_max
             if mime_types.include?(file.content_type())
-              FileUtils.mv(file.path, save_directory(base_folder, validate_name(file.original_filename), navi_list))
+              FileUtils.mv(file.tempfile, save_directory(base_folder, validate_name(file.original_filename), navi_list))
               FileUtils.chmod 0644, save_directory(base_folder, validate_name(file.original_filename), navi_list)
               if media_thumb
                 make_media_thumb(base_folder, file, navi_list)
