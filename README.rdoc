@@ -13,6 +13,10 @@ If you want, you can also manage multimedia files (ie. videos), but then you wil
 1. Install plugin using console:
 
 	rails plugin install git://github.com/galdomedia/tinymce_filemanager.git
+	
+	for rails 3.0.3 use branch rails3
+
+	rails plugin install git://github.com/galdomedia/tinymce_filemanager.git -r rails3
 
 2. Run generators:
 
