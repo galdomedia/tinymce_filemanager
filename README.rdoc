@@ -7,16 +7,12 @@ TinyMCE wrapper, that takes care of managing media files (images, videos) and li
 
 This plugin require "RMagic" to work. RMagick is used to create thumbnails of images.
 
-If you want, you can also manage multimedia files (ie. videos), but then you will need to have ffmpef installed on your machine (thumb generation).
+If you want, you can also manage multimedia files (ie. videos), but then you will need to have ffmpeg installed on your machine (thumb generation).
 
 
 1. Install plugin using console:
 
 	rails plugin install git://github.com/galdomedia/tinymce_filemanager.git
-	
-	for rails 3.0.3 use branch rails3
-
-	rails plugin install git://github.com/galdomedia/tinymce_filemanager.git -r rails3
 
 2. Run generators:
 
@@ -144,4 +140,4 @@ for "pages" controller
 
 
 
-Copyright (c) 2010 Galdomedia, Leszek Smentek, released under the MIT license
+Copyright (c) 2011 Galdomedia, Leszek Smentek, released under the MIT license
