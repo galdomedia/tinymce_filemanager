@@ -13,7 +13,7 @@
 
 	tinymce.create('tinymce.plugins.FullScreenPlugin', {
 		init : function(ed, url) {
-			var t = this, s = {}, vp;
+			var t = this, s = {}, vp, posCss;
 
 			t.editor = ed;
 
@@ -30,7 +30,7 @@
 							tinyMCE.get(ed.getParam('fullscreen_editor_id')).setContent(ed.getContent({format : 'raw'}), {format : 'raw'});
 							tinyMCE.remove(ed);
 							DOM.remove('mce_fullscreen_container');
-							ed.style.overflow = ed.getParam('fullscreen_html_overflow');
+							de.style.overflow = ed.getParam('fullscreen_html_overflow');
 							DOM.setStyle(DOM.doc.body, 'overflow', ed.getParam('fullscreen_overflow'));
 							DOM.win.scrollTo(ed.getParam('fullscreen_scrollx'), ed.getParam('fullscreen_scrolly'));
 							tinyMCE.settings = tinyMCE.oldSettings; // Restore old settings
@@ -78,7 +78,15 @@
 					if (tinymce.isIE)
 						vp.h -= 1;
 
-					n = DOM.add(DOM.doc.body, 'div', {id : 'mce_fullscreen_container', style : 'position:' + (tinymce.isIE6 || (tinymce.isIE && !DOM.boxModel) ? 'absolute' : 'fixed') + ';top:0;left:0;width:' + vp.w + 'px;height:' + vp.h + 'px;z-index:200000;'});
+					// Use fixed position if it exists
+					if (tinymce.isIE6)
+						posCss = 'absolute;top:' + vp.y;
+					else
+						posCss = 'fixed;top:0';
+
+					n = DOM.add(DOM.doc.body, 'div', {
+						id : 'mce_fullscreen_container', 
+						style : 'position:' + posCss + ';left:0;width:' + vp.w + 'px;height:' + vp.h + 'px;z-index:200000;'});
 					DOM.add(n, 'div', {id : 'mce_fullscreen'});
 
 					tinymce.each(ed.settings, function(v, n) {
@@ -116,9 +124,13 @@
 					//document.body.overflow = 'hidden';
 
 					t.resizeFunc = tinymce.dom.Event.add(DOM.win, 'resize', function() {
-						var vp = tinymce.DOM.getViewPort();
+						var vp = tinymce.DOM.getViewPort(), fed = t.fullscreenEditor, outerSize, innerSize;
 
-						t.fullscreenEditor.theme.resizeTo(vp.w, vp.h);
+						// Get outer/inner size to get a delta size that can be used to calc the new iframe size
+						outerSize = fed.dom.getSize(fed.getContainer().firstChild);
+						innerSize = fed.dom.getSize(fed.getContainer().getElementsByTagName('iframe')[0]);
+
+						fed.theme.resizeTo(vp.w - outerSize.w + innerSize.w, vp.h - outerSize.h + innerSize.h);
 					});
 				}
 			});
