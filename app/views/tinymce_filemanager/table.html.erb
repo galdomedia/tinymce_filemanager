@@ -37,7 +37,7 @@
           <%=h column[0..15] %><% if column.length > 15 %>...<% end %>
         </a>
         <br />
-        <a href="<%=h @destroy.gsub('tinymce_filemanager/', '') %>?destroy=<%=h column %>&navi=<%=h @navi %>">[<%= t("tinymce_filemanager.delete").untaint %>]</a>
+        <a href="<%=h @destroy.gsub('tinymce_filemanager/', '') %>?destroy=<%=h column %>&navi=<%=h @navi %>">[<%= t("tinymce_filemanager.delete", :default => 'Delete').untaint %>]</a>
       <% end %>
       </td>
     <% end %>
