@@ -14,7 +14,7 @@
   <% end %>
 </div>
 
-<h1><%= t("tinymce_filemanager.folders").untaint %></h1>
+<h1><%= t("tinymce_filemanager.folders", :default => 'Folders').untaint %></h1>
 <table>
   <% @dirs_table.each do |row| %>
     <tr>
@@ -45,14 +45,14 @@
   <% end %>
 </table>
 
-<h2><%= t("tinymce_filemanager.create_folder").untaint %></h2>
+<h2><%= t("tinymce_filemanager.create_folder", :default => 'Create folder').untaint %></h2>
 
 <%= form_for @folder_form_name, :url => "#{@folder_action_name.gsub('tinymce_filemanager/', '')}?navi=#{@navi}" do |f| %>
   <%= f.text_field @folder_field_name %>
-  <%= f.submit t("tinymce_filemanager.create").untaint %>
+  <%= f.submit t("tinymce_filemanager.create", :default => 'Create').untaint %>
 <% end %>
 
-<h1><%= t("tinymce_filemanager.items").untaint %></h1>
+<h1><%= t("tinymce_filemanager.items", :default => 'Items').untaint %></h1>
 
 <table>
   <% @items_table.each do |row| %>
@@ -69,16 +69,16 @@
           <%= column[:name].gsub(/(.jpeg)$/, "")[0..15].untaint %><% if column[:name].gsub(/(.jpeg)$/, "").length > 15 %>...<% end %>
           </a>
           <br />
-          <a href="<%=h @destroy.gsub('tinymce_filemanager/', '') %>?destroy=<%=h column[:name] %>&navi=<%=h @navi %>">[<%= t("tinymce_filemanager.delete").untaint %>]</a>
+          <a href="<%=h @destroy.gsub('tinymce_filemanager/', '') %>?destroy=<%=h column[:name] %>&navi=<%=h @navi %>">[<%= t("tinymce_filemanager.delete", :default => 'Delete').untaint %>]</a>
       </td>
     <% end %>
     </tr>
   <% end %>
 </table>
 
-<h2><%= t("tinymce_filemanager.upload_file").untaint %></h2>
+<h2><%= t("tinymce_filemanager.upload_file", :default => 'Upload file').untaint %></h2>
 
 <%= form_for @upload_form_name, :url => "#{@upload_action_name.gsub('tinymce_filemanager/', '')}?navi=#{@navi}", :html => {:multipart => true } do |f| %>
   <%= f.file_field @upload_field_name %>
-  <%= f.submit t("tinymce_filemanager.upload").untaint %>
+  <%= f.submit t("tinymce_filemanager.upload", :default => 'Upload').untaint %>
 <% end %>

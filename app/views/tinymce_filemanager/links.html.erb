@@ -20,7 +20,7 @@
     <% end %>
   </table>
   <%= t "tinymce_filemanager.by_name"%>: <%= f.text_field :name, :value => params[:search_form][:name] %>
-  <%= f.submit t("tinymce_filemanager.filter_links") %>
+  <%= f.submit t("tinymce_filemanager.filter_links", :default => 'Filter links') %>
 <% end %>
 
 <h2><%= t "tinymce_filemanager.select_link"%>:</h2>
