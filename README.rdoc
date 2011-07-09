@@ -10,7 +10,7 @@ If you want, you can also manage multimedia files (ie. videos), but then you wil
 
 1. Install plugin using console:
 
-    rails plugin install git://github.com/galdomedia/tinymce_filemanager.git
+    rails plugin install git://github.com/galdomedia/tinymce_filemanager.git -r rails 3
 
 2. Run generators:
 
@@ -24,15 +24,15 @@ If you want, you can also manage multimedia files (ie. videos), but then you wil
 4. In layout (best in page <head> section) add:
 
     <%= tinymce_managed_javascript_tag "pages" %>
-  
- where "pages" is name of controller from last step
+
+   where "pages" is name of controller from last step
 
 5. Add tag in form:
 	
     <%= tinymce_managed_tag "some_field_name", "some field content" %>
     
-    or use builder method:
-    
+   or use builder method:
+
     <%= f.tinymce_managed :some_field_name %>
 
 == Basic Usage
@@ -62,8 +62,7 @@ application layout:
 
 pages new view:
 
-  <h1>New page</h1>
-	
+  <h1>New page</h1>  
   <% form_for(@page) do |f| %>
   <%= f.error_messages %>
     ...
@@ -120,6 +119,5 @@ for "pages" controller
 - convert into gem
 
 - link browser should accept chained queries (ie. Page.where('visible=?',true).order('updated_at DESC') )
-
 
 Copyright (c) 2011 Galdomedia, Leszek Smentek, released under the MIT license
