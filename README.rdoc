@@ -139,5 +139,4 @@ for "pages" controller
 - link browser should accept chained queries (ie. Page.where('visible=?',true).order('updated_at DESC') )
 
 
-
 Copyright (c) 2011 Galdomedia, Leszek Smentek, released under the MIT license
