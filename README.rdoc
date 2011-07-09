@@ -25,13 +25,13 @@ If you want, you can also manage multimedia files (ie. videos), but then you wil
 
     <%= tinymce_managed_javascript_tag "pages" %>
 
-where "pages" is name of controller from last step
+   where "pages" is name of controller from last step
 
 5. Add tag in form:
 	
     <%= tinymce_managed_tag "some_field_name", "some field content" %>
     
-or use builder method:
+   or use builder method:
     
     <%= f.tinymce_managed :some_field_name %>
 
