@@ -422,8 +422,8 @@
     end
     
     def make_image_thumb(base_folder, file, navi_list)
-      image = Magick::Image.read(save_directory(base_folder, validate_name(file.original_filename), navi_list)).first
-      image = image.resize_to_fill(@@thumbs_width, @@thumbs_height)
+      image = MiniMagick::Image.open(save_directory(base_folder, validate_name(file.original_filename), navi_list))
+      image.resize "#{@@thumbs_width}x#{@@thumbs_height}"
       image.write(thumb_save_directory(base_folder, "#{validate_name(file.original_filename)}.jpeg", navi_list))
       #File.open((thumb_save_directory(base_folder, validate_name("#{file.original_filename}.unknown"), navi_list)), 'w')
     end

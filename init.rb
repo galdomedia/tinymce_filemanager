@@ -1,4 +1,3 @@
-require 'RMagick'
 require 'tinymce_filemanager'
 
 ActionView::Base.send(:include, TinymceFilemanager::ViewHelpers)
