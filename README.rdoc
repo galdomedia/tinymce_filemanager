@@ -26,9 +26,13 @@ If you want, you can also manage multimedia files (ie. videos), but then you wil
     <%= tinymce_managed_javascript_tag "pages" %>
 
    where "pages" is name of controller from last step
+   
+   The theme defaults to tinymce_filemanager's "advanced" theme flavour however you can pass an additional parameter to the <tt>tinymce_managed_javascript_tag</tt> which will allow you to use a custom theme or the provided simple theme.
+
+    <%= tinymce_managed_javascript_tag "pages", "simple" %>
 
 5. Add tag in form:
-	
+
     <%= tinymce_managed_tag "some_field_name", "some field content" %>
 
    
@@ -64,7 +68,7 @@ application layout:
 
 optional theme:
 
-  The theme defaults to tinymce_filemanager's "advanced" theme flavour however you can pass an additional parameter to the `tinymce_managed_javascript_tag` which will allow you to use a custom theme or the provided simple theme.
+The theme defaults to tinymce_filemanager's "advanced" theme flavour however you can pass an additional parameter to the <tt>tinymce_managed_javascript_tag</tt> which will allow you to use a custom theme or the provided simple theme.
 
     <%= tinymce_managed_javascript_tag "pages", "simple" %>
 
