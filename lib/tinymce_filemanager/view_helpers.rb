@@ -1,8 +1,9 @@
 module TinymceFilemanager::ViewHelpers
 
-  def tinymce_managed_javascript_tag( controller = nil )
+  def tinymce_managed_javascript_tag( controller = nil, theme='advanced' )
+    opts = {:manager => "#{controller.to_s if controller.present?}", :theme => theme}.to_query
     scripts = "<script src='/javascripts/tiny_mce/tiny_mce.js' type='text/javascript'></script>\n" +
-      "<script type='text/javascript' src='/javascripts/tinymce_managed.js?#{!controller.blank? && "manager=#{controller.to_s}" || ""}'></script>"
+      "<script type='text/javascript' src='/javascripts/tinymce_managed.js?#{opts}'></script>"
     scripts.respond_to?(:html_safe) ? scripts.html_safe : scripts
   end
 
