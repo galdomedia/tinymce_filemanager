@@ -31,7 +31,9 @@ If you want, you can also manage multimedia files (ie. videos), but then you wil
 	
     <%= tinymce_managed_tag "some_field_name", "some field content" %>
 
+   
    or use builder method:
+
 
     <%= f.tinymce_managed :some_field_name %>
 
@@ -59,6 +61,12 @@ application layout:
       ...
     </body>
   </html>
+
+optional theme:
+
+  The theme defaults to tinymce_filemanager's "advanced" theme flavour however you can pass an additional parameter to the `tinymce_managed_javascript_tag` which will allow you to use a custom theme or the provided simple theme.
+
+    <%= tinymce_managed_javascript_tag "pages", "simple" %>
 
 pages new view:
 
