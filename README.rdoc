@@ -2,142 +2,135 @@
 
 TinyMCE wrapper, that takes care of managing media files (images, videos) and links within your application.
 
-
 == Installation
 
 This plugin require "RMagic" to work. RMagick is used to create thumbnails of images.
 
 If you want, you can also manage multimedia files (ie. videos), but then you will need to have ffmpeg installed on your machine (thumb generation).
 
-
 1. Install plugin using console:
 
-	rails plugin install git://github.com/galdomedia/tinymce_filemanager.git
+    rails plugin install git://github.com/galdomedia/tinymce_filemanager.git
 
 2. Run generators:
 
-	rails generate tinymce_filemanager:installation
-	rails generate tinymce_filemanager:icons_installation
+    rails generate tinymce_filemanager:installation
+    rails generate tinymce_filemanager:icons_installation
 
 3. Add include line in controller that will manage images ( controller Pages for example )
 
-	include TinymceFilemanager
+    include TinymceFilemanager
 
 4. In layout (best in page <head> section) add:
 
-	<%= tinymce_managed_javascript_tag "pages" %>
+    <%= tinymce_managed_javascript_tag "pages" %>
 
    where "pages" is name of controller from last step
+   
+   The theme defaults to tinymce_filemanager's "advanced" theme flavour however you can pass an additional parameter to the <tt>tinymce_managed_javascript_tag</tt> which will allow you to use a custom theme or the provided simple theme.
+
+    <%= tinymce_managed_javascript_tag "pages", "simple" %>
 
 5. Add tag in form:
-	
-	<%= tinymce_managed_tag "some_field_name", "some field content" %>
+
+    <%= tinymce_managed_tag "some_field_name", "some field content" %>
+
    
    or use builder method:
-   
-	tinymce_managed :some_field_name
+
+
+    <%= f.tinymce_managed :some_field_name %>
 
 == Basic Usage
 
 controller "pages":
 
-	class PagesController < ApplicationController
-	
-    		include TinymceFilemanager
-		
-    		def index
-    		...
-		
-	end
+  class PagesController < ApplicationController
+    include TinymceFilemanager
+    def index
+    ...
+  end
 
 application layout:
  
-	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  		<head>
-    			<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  
-  			...
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+      <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+      ...
+      <%= tinymce_managed_javascript_tag "pages" %>
+      ...
+    </head>
+    <body>
+      ...
+    </body>
+  </html>
 
-  			<%= tinymce_managed_javascript_tag "pages" %>
+optional theme:
 
-  			...
-  
-  		</head>
-		<body>
-		
-    		...
-		
-  		</body>
-	</html>
+The theme defaults to tinymce_filemanager's "advanced" theme flavour however you can pass an additional parameter to the <tt>tinymce_managed_javascript_tag</tt> which will allow you to use a custom theme or the provided simple theme.
+
+    <%= tinymce_managed_javascript_tag "pages", "simple" %>
 
 pages new view:
 
-	<h1>New page</h1>
-	
-	<% form_for(@page) do |f| %>
-	<%= f.error_messages %>
-	
-	...
-	
-	<p>
-		<%= f.label :body %><br />
-		<%= f.tinymce_managed :body %>
-	</p>
-		
-		...
-		
-	<p>
-		<%= f.submit  "Create" %>
-	</p>
-	
-	<% end %>
+  <h1>New page</h1>  
+  <% form_for(@page) do |f| %>
+  <%= f.error_messages %>
+    ...
+    <p>
+      <%= f.label :body %><br />
+      <%= f.tinymce_managed :body %>
+    </p>
+    ...
+    <p>
+      <%= f.submit  "Create" %>
+    </p>
+  <% end %>
 
-	<%= link_to 'Back', pages_path %>
+  <%= link_to 'Back', pages_path %>
 
 == Sample Configuration
 
 for "pages" controller
 
-	class PagesController < ApplicationController
-	
-		include TinymceFilemanager
-
-		# accept only jpeg and gif for images
-		image_accept_mime_types ['image/jpeg', 'image/gif']
-		
-		# limit image file size to 2MB
-		image_file_size_limit 2.megabytes
-		    
-		# accept only mpeg and flash files(swf) for media
-		media_accept_mime_types ['video/mpeg', 'application/x-shockwave-flash']
-
-		# limit media file size to 15MB
-		media_file_size_limit 15.megabytes
-		
-		#thumbs created into '_small_' subdir
-		thumbs_subdir 'small'
-		
-		#images save to RAILS_ROOT/public/manager/images thumbs in RAILS_ROOT/public/manager/images/_small_
-		image_save_into_public_subdir 'manager/images'
-		   
-		#images save to RAILS_ROOT/public/manager/images thumbs in RAILS_ROOT/public/manager/images/_small_
-		media_save_into_public_subdir 'manager/media'
-		
-		#classes of objects, that can be browsed through LinkBrowser
-		link_classes_accepted [Page]
-		
-		...
-	
-	end
-
+  class PagesController < ApplicationController
+    
+    include TinymceFilemanager
+    
+    # accept only jpeg and gif for images
+    image_accept_mime_types ['image/jpeg', 'image/gif', 'image/png']
+    
+    # limit image file size to 2MB
+    image_file_size_limit 2.megabytes
+        
+    # accept only mpeg and flash files(swf) for media
+    media_accept_mime_types ['video/mpeg', 'application/x-shockwave-flash']
+    
+    # limit media file size to 15MB
+    media_file_size_limit 15.megabytes
+    
+    #thumbs created into '_small_' subdir
+    thumbs_subdir 'small'
+    
+    #images save to RAILS_ROOT/public/manager/images thumbs in RAILS_ROOT/public/manager/images/_small_
+    image_save_into_public_subdir 'manager/images'
+       
+    #images save to RAILS_ROOT/public/manager/images thumbs in RAILS_ROOT/public/manager/images/_small_
+    media_save_into_public_subdir 'manager/media'
+    
+    #classes of objects, that can be browsed through LinkBrowser (separate by comma for multiple classes)
+    link_classes_accepted [Page,Category] 
+    
+    ...
+    
+  end
 
 == TODO
 
 - convert into gem
 
 - link browser should accept chained queries (ie. Page.where('visible=?',true).order('updated_at DESC') )
-
 
 
 Copyright (c) 2011 Galdomedia, Leszek Smentek, released under the MIT license
