@@ -30,7 +30,7 @@ If you want, you can also manage multimedia files (ie. videos), but then you wil
 5. Add tag in form:
 	
     <%= tinymce_managed_tag "some_field_name", "some field content" %>
-    
+
    or use builder method:
 
     <%= f.tinymce_managed :some_field_name %>
@@ -87,7 +87,7 @@ for "pages" controller
     include TinymceFilemanager
     
     # accept only jpeg and gif for images
-    image_accept_mime_types ['image/jpeg', 'image/gif']
+    image_accept_mime_types ['image/jpeg', 'image/gif', 'image/png']
     
     # limit image file size to 2MB
     image_file_size_limit 2.megabytes
