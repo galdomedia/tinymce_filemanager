@@ -4,7 +4,7 @@ function tinymce_init()
     tinyMCE.init({
         mode : "textareas",
 	editor_selector : "tinymce_managed",
-        theme : <%=h @manager_theme %>,
+        theme : "<%=h @manager_theme %>",
         relative_urls : false,
         language: "<%=h @manager_lang %>",
 
