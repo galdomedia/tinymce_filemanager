@@ -2,9 +2,12 @@
 
 TinyMCE wrapper, that takes care of managing media files (images, videos) and links within your application.
 
+Gem (still unofficial) is available in different repo: {tinymce_fm}[https://github.com/galdomedia/tinymce_fm]
+
+
 == Installation
 
-This plugin require "RMagic" to work. RMagick is used to create thumbnails of images.
+This plugin require "MiniMagick" to work. MiniMagick is used to create thumbnails of images.
 
 If you want, you can also manage multimedia files (ie. videos), but then you will need to have ffmpeg installed on your machine (thumb generation).
 
